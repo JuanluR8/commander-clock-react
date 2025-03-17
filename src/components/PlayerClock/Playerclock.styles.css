@@ -20,12 +20,15 @@
   }
 
   .player-clock--time {
-    font-size: 4em;
+    --font-size: 6em;
+
+    font-size: var(--font-size);
     font-weight: bold;
-    cursor: inherit;
+    user-select: none;
+    font-family: monospace;
 
     @media (max-width: 600px) {
-      font-size: 2.4em;
+      --font-size: 2.6em;
     }
   }
 }

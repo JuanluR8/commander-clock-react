@@ -19,7 +19,7 @@ export const PlayerClock = (props: Props) => {
   const articleClasses = [
     'player-clock',
     ...isActive ? ['active'] : [],
-    ...playerId < (state.numPlayers / 2) ? ['flip'] : ''
+    ...playerId < (state.numPlayers / 2) ? ['flip'] : []
   ]
 
   const decreaseTimeout = useCallback(() => {
