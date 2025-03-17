@@ -15,27 +15,19 @@ function App() {
     setState(prevState => ({ ...prevState, ...payload }))
   }
 
-  const onClickPlayerTimer = (playerId: GlobalState['activePlayer']) => {
-    patchState({ activePlayer: state.activePlayer === playerId 
-      ? undefined 
-      : playerId
-    })
-  }
-
   return (
-    <GlobalContext.Provider value={state}>
+    <GlobalContext.Provider value={{ state, patchState }}>
       <main className='main-container'>
         { 
           Array.from({ length: state.numPlayers }).map((_, playerIndex) => 
             <PlayerClock 
               key={playerIndex}
               playerId={playerIndex}
-              onClick={() => onClickPlayerTimer(playerIndex)}
             />
           ) 
         }
 
-        <ActionsMenu state={state} patchState={patchState} />
+        <ActionsMenu />
       </main>
     </GlobalContext.Provider>
   )

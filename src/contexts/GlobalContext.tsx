@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import {createContext, type Dispatch, useContext} from 'react'
 
 export interface GlobalState {
   activePlayer: number | undefined
@@ -6,14 +6,19 @@ export interface GlobalState {
   timeLimit: number
 }
 
-export const GlobalContext = createContext<GlobalState | undefined>(undefined)
+interface Ctx {
+  state: GlobalState,
+  patchState: Dispatch<Partial<GlobalState>>,
+}
+
+export const GlobalContext = createContext<Ctx | undefined>(undefined)
 
 export const useGlobalContext = () => {
-  const state = useContext(GlobalContext)
+  const ctx = useContext(GlobalContext)
 
-  if (state === undefined) {
+  if (ctx === undefined) {
     throw new Error('useGlobalContext must be used within GlobalContext.Provider')
   }
 
-  return state
+  return ctx
 }

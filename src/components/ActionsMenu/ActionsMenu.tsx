@@ -1,18 +1,13 @@
-import { type GlobalState } from "@/contexts"
+import { useGlobalContext } from "@/contexts"
 import { MinusIcon, PlusIcon, ReloadIcon } from "../Icons"
 import './ActionsMenu.style.css'
 
 const MIN_LIMIT = 5
 const MAX_LIMIT = 60
 
-interface Props {
-  state: GlobalState
-  patchState: (payload: Partial<GlobalState>) => void
-}
+export const ActionsMenu = () => {
 
-export const ActionsMenu = (props: Props) => {
-
-  const { state, patchState } = props
+  const { state, patchState } = useGlobalContext()
 
   const resetGame = () => {
     const oldLimit = state.timeLimit

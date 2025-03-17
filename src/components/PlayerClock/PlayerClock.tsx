@@ -6,13 +6,12 @@ import './Playerclock.styles.css'
 
 interface Props {
   playerId: number
-  onClick: () => void
 }
 
 export const PlayerClock = (props: Props) => {
   const { playerId } = props
 
-  const state = useGlobalContext()
+  const { state, patchState } = useGlobalContext()
   const [time, setTime] = useState(0)
 
   const isActive = state.activePlayer === playerId
@@ -21,6 +20,13 @@ export const PlayerClock = (props: Props) => {
     ...isActive ? ['active'] : [],
     ...playerId < (state.numPlayers / 2) ? ['flip'] : []
   ]
+
+  const onClickPlayerTimer = useCallback(() => {
+    patchState({ activePlayer: state.activePlayer === playerId
+        ? undefined
+        : playerId
+    })
+  }, [patchState, state.activePlayer, playerId])
 
   const decreaseTimeout = useCallback(() => {
     const intervalId = setInterval(() => {
@@ -52,10 +58,10 @@ export const PlayerClock = (props: Props) => {
   return (
     <article 
       className={articleClasses.join(' ')}
-      onClick={props.onClick}
+      onClick={onClickPlayerTimer}
     >
       <div className="player-clock--time">
-        {formatTime(time)}
+        { formatTime(time) }
       </div>
     </article>
   )
