@@ -1,4 +1,4 @@
-import {createContext, type Dispatch, useContext} from 'react'
+import { createContext, type Dispatch, useContext } from 'react'
 
 export interface GlobalState {
   activePlayer: number | undefined
@@ -6,12 +6,12 @@ export interface GlobalState {
   timeLimit: number
 }
 
-interface Ctx {
+interface GlobalCtx {
   state: GlobalState,
   patchState: Dispatch<Partial<GlobalState>>,
 }
 
-export const GlobalContext = createContext<Ctx | undefined>(undefined)
+export const GlobalContext = createContext<GlobalCtx | undefined>(undefined)
 
 export const useGlobalContext = () => {
   const ctx = useContext(GlobalContext)

@@ -9,13 +9,19 @@ export const ActionsMenu = () => {
 
   const { state, patchState } = useGlobalContext()
 
+  const updateTimeLimit = (value: number) => {
+    if (value <= MIN_LIMIT || value >= MAX_LIMIT) return
+
+    patchState({ timeLimit: value })
+  }
+
   const resetGame = () => {
     const oldLimit = state.timeLimit
     
     patchState({ activePlayer: undefined, timeLimit: 0 })
 
     setTimeout(() => {
-      patchState({ timeLimit: oldLimit })
+      updateTimeLimit(oldLimit)
     }, 500)
   }
 
@@ -24,7 +30,7 @@ export const ActionsMenu = () => {
       <button
         className="actions-menu--btn round-circle" 
         disabled={state.timeLimit <= MIN_LIMIT || !!state.activePlayer} 
-        onClick={() => patchState({ timeLimit: state.timeLimit - 1 })}
+        onClick={() => updateTimeLimit(state.timeLimit - 1)}
       >
         <MinusIcon />
       </button>
@@ -37,7 +43,7 @@ export const ActionsMenu = () => {
       <button 
         className="actions-menu--btn round-circle"
         disabled={state.timeLimit >= MAX_LIMIT || !!state.activePlayer} 
-        onClick={() => patchState({ timeLimit: state.timeLimit + 1 })}
+        onClick={() => updateTimeLimit(state.timeLimit + 1)}
       >
         <PlusIcon />
       </button>

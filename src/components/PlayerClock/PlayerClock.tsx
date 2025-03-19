@@ -16,7 +16,6 @@ export const PlayerClock = (props: Props) => {
 
   const isActive = state.activePlayer === playerId
   const articleClasses = [
-    'player-clock',
     ...isActive ? ['active'] : [],
     ...playerId < (state.numPlayers / 2) ? ['flip'] : []
   ]
@@ -57,7 +56,7 @@ export const PlayerClock = (props: Props) => {
 
   return (
     <article 
-      className={articleClasses.join(' ')}
+      className={['player-clock', ...articleClasses].join(' ')}
       onClick={onClickPlayerTimer}
     >
       <div className="player-clock--time">

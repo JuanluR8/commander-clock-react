@@ -17,7 +17,7 @@ function App() {
 
   return (
     <GlobalContext.Provider value={{ state, patchState }}>
-      <main className='main-container'>
+      <main className="main-container">
         { 
           Array.from({ length: state.numPlayers }).map((_, playerIndex) => 
             <PlayerClock 
