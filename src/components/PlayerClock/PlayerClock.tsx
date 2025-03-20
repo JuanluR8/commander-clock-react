@@ -4,7 +4,9 @@ import { formatTime } from '@/utils'
 import { useGlobalContext } from '@/contexts'
 import './Playerclock.styles.css'
 
-interface Props {
+export const TEST_ID = 'player-clock'
+
+export interface Props {
   playerId: number
 }
 
@@ -57,6 +59,7 @@ export const PlayerClock = (props: Props) => {
   return (
     <article 
       className={['player-clock', ...articleClasses].join(' ')}
+      data-testid={ TEST_ID }
       onClick={onClickPlayerTimer}
     >
       <div className="player-clock--time">
