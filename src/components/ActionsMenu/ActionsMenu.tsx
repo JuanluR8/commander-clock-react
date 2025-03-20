@@ -29,6 +29,7 @@ export const ActionsMenu = () => {
     <div className='actions-menu'>
       <button
         className="actions-menu--btn round-circle" 
+        aria-label="Decrease time limit"
         disabled={state.timeLimit <= MIN_LIMIT || !!state.activePlayer} 
         onClick={() => updateTimeLimit(state.timeLimit - 1)}
       >
@@ -36,12 +37,14 @@ export const ActionsMenu = () => {
       </button>
       <button 
         className="actions-menu--btn" 
+        aria-label="Reset"
         onClick={resetGame}
       >
         <ReloadIcon />
       </button>
       <button 
         className="actions-menu--btn round-circle"
+        aria-label="Increase time limit"
         disabled={state.timeLimit >= MAX_LIMIT || !!state.activePlayer} 
         onClick={() => updateTimeLimit(state.timeLimit + 1)}
       >
