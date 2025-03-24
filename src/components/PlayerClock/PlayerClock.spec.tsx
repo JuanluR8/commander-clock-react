@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
-import { screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+import { screen, cleanup, fireEvent, waitFor, render } from '@testing-library/react';
 import { PlayerClock, TEST_ID, type Props } from './PlayerClock'
 import { renderWithGlobalContext, defaultState, patchState, type RenderOptions } from '@/tests/tests.utils';
 
@@ -15,7 +15,9 @@ describe('<ActionsMenu />', () => {
     vi.clearAllMocks()
   })
 
-  afterEach(cleanup)
+  afterEach(() => {
+    cleanup()
+  })
   
   it('should render component', () => {
     renderWithProps({ playerId: firstPlayer })
@@ -73,8 +75,17 @@ describe('<ActionsMenu />', () => {
     renderWithProps({ playerId: firstPlayer }, { providerProps: { state: { activePlayer: firstPlayer, timeLimit: 20 } } })
 
     expect(screen.getByTestId(TEST_ID).innerHTML).toMatch('20:00')
+
     waitFor(() => {
         expect(screen.getByTestId(TEST_ID).innerHTML).toMatch('19:55')
     }, { timeout: 5000 })
+  })
+
+  it('should throw error if component is rendered without GlobalContext provider', () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    expect(() => render(<PlayerClock playerId={0} />)).toThrow()
+
+    consoleErrorSpy.mockRestore()
   })
 });

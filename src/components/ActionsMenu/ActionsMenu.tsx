@@ -1,5 +1,5 @@
-import { useGlobalContext } from "@/contexts"
-import { MinusIcon, PlusIcon, ReloadIcon } from "../Icons"
+import { useGlobalContext } from '@/contexts'
+import { MinusIcon, PlusIcon, ReloadIcon } from '../Icons'
 import './ActionsMenu.style.css'
 
 export const MIN_LIMIT = 5
@@ -7,18 +7,22 @@ export const MAX_LIMIT = 60
 export const TEST_ID = 'actions-menu'
 
 export const ActionsMenu = () => {
-
   const { state, patchState } = useGlobalContext()
 
   const updateTimeLimit = (value: number) => {
-    if (value <= MIN_LIMIT || value >= MAX_LIMIT || state.activePlayer !== undefined) return
+    if (
+      value <= MIN_LIMIT ||
+      value >= MAX_LIMIT ||
+      state.activePlayer !== undefined
+    )
+      return
 
     patchState({ timeLimit: value })
   }
 
   const resetGame = () => {
     const oldLimit = state.timeLimit
-    
+
     patchState({ activePlayer: undefined, timeLimit: 0 })
 
     setTimeout(() => {
@@ -27,30 +31,30 @@ export const ActionsMenu = () => {
   }
 
   return (
-    <div className='actions-menu' data-testid={TEST_ID}>
+    <div className="actions-menu" data-testid={TEST_ID}>
       <button
-        className="actions-menu--btn round-circle" 
+        className="actions-menu--btn round-circle"
         aria-label="Decrease time limit"
-        disabled={state.timeLimit <= MIN_LIMIT || !!state.activePlayer} 
+        disabled={state.timeLimit <= MIN_LIMIT || !!state.activePlayer}
         onClick={() => updateTimeLimit(state.timeLimit - 1)}
       >
         <MinusIcon />
       </button>
-      <button 
-        className="actions-menu--btn" 
+      <button
+        className="actions-menu--btn"
         aria-label="Reset"
         onClick={resetGame}
       >
         <ReloadIcon />
       </button>
-      <button 
+      <button
         className="actions-menu--btn round-circle"
         aria-label="Increase time limit"
-        disabled={state.timeLimit >= MAX_LIMIT || !!state.activePlayer} 
+        disabled={state.timeLimit >= MAX_LIMIT || !!state.activePlayer}
         onClick={() => updateTimeLimit(state.timeLimit + 1)}
       >
         <PlusIcon />
       </button>
-    </div> 
+    </div>
   )
 }

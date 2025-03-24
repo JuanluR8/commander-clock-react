@@ -2,8 +2,8 @@ import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
 import { screen, cleanup, render } from '@testing-library/react';
 import App, { TEST_ID } from './App'
 import { TEST_ID as PlayerClockTestId } from './components/PlayerClock/PlayerClock'
-import { TEST_ID as ActionMenuTestId } from './components/ActionsMenu/ActionsMenu';
-import { NUM_PLAYERS } from './constants';
+import { TEST_ID as ActionMenuTestId } from './components/ActionsMenu/ActionsMenu'
+import { NUM_PLAYERS } from './constants'
 
 describe('<ActionsMenu />', () => {
   beforeEach(() =>  {

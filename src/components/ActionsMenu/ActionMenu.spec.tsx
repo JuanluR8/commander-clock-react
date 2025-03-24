@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
-import { screen, cleanup, fireEvent } from '@testing-library/react';
+import { screen, cleanup, fireEvent, render } from '@testing-library/react'
 import { ActionsMenu, TEST_ID, MIN_LIMIT, MAX_LIMIT } from './ActionsMenu'
-import { renderWithGlobalContext, defaultState as state, patchState } from '@/tests/tests.utils';
+import { renderWithGlobalContext, defaultState as state, patchState } from '@/tests/tests.utils'
 
 const getBtn = (name: RegExp | string) => screen.getByRole('button', { name })
 
@@ -56,8 +56,20 @@ describe('<ActionsMenu />', () => {
   it('should execute context method on click Reset button', () => {
     renderWithGlobalContext(<ActionsMenu />)
 
+    vi.useFakeTimers()
+
     fireEvent.click(getBtn(/Reset/i))
-  
-    expect(patchState).toHaveBeenCalled()
+
+    vi.advanceTimersByTime(500)
+
+    expect(patchState).toHaveBeenCalledTimes(2)
   })
+
+  it('should throw error if component is rendered without GlobalContext provider', () => {
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+  
+      expect(() => render(<ActionsMenu />)).toThrow()
+  
+      consoleErrorSpy.mockRestore()
+    })
 });
