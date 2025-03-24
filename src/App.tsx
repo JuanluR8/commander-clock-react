@@ -4,6 +4,8 @@ import { PlayerClock, ActionsMenu } from '@/components'
 import { GlobalContext, type GlobalState } from '@/contexts'
 import './styles/App.css'
 
+export const TEST_ID = 'main-container'
+
 function App() {
   const [state, setState] = useState<GlobalState>({ 
     activePlayer: undefined, 
@@ -17,7 +19,7 @@ function App() {
 
   return (
     <GlobalContext.Provider value={{ state, patchState }}>
-      <main className="main-container">
+      <main className="main-container" data-testid={ TEST_ID }>
         { 
           Array.from({ length: state.numPlayers }).map((_, playerIndex) => 
             <PlayerClock 
