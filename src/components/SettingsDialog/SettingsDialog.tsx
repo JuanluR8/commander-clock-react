@@ -17,7 +17,7 @@ interface Props {
 export const SettingsDialog = (props: Props) => {
   const { open, onClose } = props
   const { state, patchState } = useGlobalContext()
-  const [settings, setSettings] = useState(state)
+  const [settings, setSettings] = useState({ ...state })
 
   const updateTimeLimit = (value: number) => {
     setSettings(prevState => ({ ...prevState, timeLimit: value }))
@@ -28,13 +28,11 @@ export const SettingsDialog = (props: Props) => {
   }
 
   const resetGame = () => {
-    const oldLimit = state.timeLimit
-
     patchState({ activePlayer: undefined, timeLimit: 0 })
 
     setTimeout(() => {
-      updateTimeLimit(oldLimit)
-      onClose()
+      updateTimeLimit(state.timeLimit)
+      saveSettings()
     }, 500)
   }
 
