@@ -20,6 +20,7 @@ export const PlayerClock = (props: Props) => {
   const articleClasses = [
     ...(isActive ? ['active'] : []),
     ...(playerId < state.numPlayers / 2 ? ['flip'] : []),
+    ...(time < 0 ? ['consumed'] : []),
   ]
 
   const onClickPlayerTimer = useCallback(() => {
@@ -32,14 +33,7 @@ export const PlayerClock = (props: Props) => {
     const intervalId = setInterval(() => {
       if (!isActive) return
 
-      setTime(prevTime => {
-        if (prevTime <= 0) {
-          clearInterval(intervalId)
-          return 0
-        }
-
-        return prevTime - 1000
-      })
+      setTime(prevTime => prevTime - 1000)
     }, 1000)
 
     return () => clearInterval(intervalId)

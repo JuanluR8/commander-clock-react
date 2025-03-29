@@ -13,10 +13,19 @@
   &.active {
     --bg-color: var(--primary);
     --text-color: var(--black);
+
+    &.consumed {
+      --text-color: var(--black);
+      --bg-color: var(--red);
+    }
   }
 
   &.flip {
     transform: rotate(180deg);
+  }
+
+  &.consumed {
+    --text-color: var(--red);
   }
 
   .player-clock--time {

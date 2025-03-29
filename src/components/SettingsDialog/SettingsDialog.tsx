@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useGlobalContext } from '@/contexts'
-import { BaseBtn } from '../BaseBtn/BaseBtn'
-import { CloseIcon, MinusIcon, PlusIcon } from '../Icons'
+import {
+  BaseBtn,
+  BaseRadioGroup,
+  CloseIcon,
+  MinusIcon,
+  PlusIcon,
+} from '@/components'
 import './SettingsDialog.styles.css'
-import { BaseRadioGroup } from '../BaseRadioGroup/BaseRadioGroup'
 
 export const MIN_LIMIT = 5
 export const MAX_LIMIT = 60
