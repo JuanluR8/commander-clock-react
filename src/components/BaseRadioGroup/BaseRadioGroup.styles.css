@@ -1,0 +1,33 @@
+.radio-group {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+input[type='radio'] {
+  display: none;
+
+  & ~ label {
+    font-family: monospace;
+    line-height: 1;
+    font-size: 24px;
+    padding: 12px;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    outline: 1px solid var(--primary);
+    aspect-ratio: 1 / 1;
+    height: 24px;
+  }
+
+  &:checked ~ label {
+    background-color: var(--primary);
+    color: var(--black);
+  }
+
+  &:not(:checked) ~ label {
+    background-color: var(--black);
+    color: white;
+  }
+}
