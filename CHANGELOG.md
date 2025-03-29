@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/JuanluR8/commander-clock-react/compare/v1.2.0...v1.2.1) (2025-03-29)
+
+
+### Bug Fixes
+
+* fix error on reset game from settings dialog ([0b572f2](https://github.com/JuanluR8/commander-clock-react/commit/0b572f28fbd4ddb08f2c47a4a666db84701fd4fe))
+
 ## [1.2.0](https://github.com/JuanluR8/commander-clock-react/compare/v1.1.0...v1.2.0) (2025-03-29)
 
 
