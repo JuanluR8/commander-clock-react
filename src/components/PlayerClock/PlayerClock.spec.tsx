@@ -21,7 +21,7 @@ const renderWithProps = ({ playerId }: Props, options?: RenderOptions) => {
   return renderWithGlobalContext(<PlayerClock playerId={playerId} />, options)
 }
 
-describe('<ActionsMenu />', () => {
+describe('<PlayerClock />', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })

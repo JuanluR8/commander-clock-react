@@ -1,6 +1,6 @@
 import './BaseRadioGroup.styles.css'
 
-interface BaseRadioGroupProps<T extends string | number> {
+export interface BaseRadioGroupProps<T extends string | number> {
   className?: string
   options: T[]
   name: string
@@ -14,7 +14,7 @@ export const BaseRadioGroup = <T extends string | number>(
   const { className = '', options, name, value, onChange } = props
 
   return (
-    <div className={`radio-group ${className}`}>
+    <div className={`radio-group ${className}`.trim()}>
       {options.map(option => (
         <div key={option} className="radio--input">
           <input

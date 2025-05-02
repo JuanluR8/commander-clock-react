@@ -3,7 +3,7 @@ import { MINUTE_IN_MS } from '@/constants'
 
 import { describe, expect, it } from 'vitest'
 
-describe.skip('formatters', () => {
+describe('formatters', () => {
   it('formatTime - should return hh:mm format', () => {
     const input = MINUTE_IN_MS * 5
 
