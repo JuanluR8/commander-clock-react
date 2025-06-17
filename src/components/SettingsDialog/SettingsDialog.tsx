@@ -13,12 +13,12 @@ export const MIN_LIMIT = 5
 export const MAX_LIMIT = 60
 const NUM_PLAYERS_OPTIONS = [2, 4]
 
-interface Props {
+export interface SettingsDialogProps {
   open: boolean
   onClose: () => void
 }
 
-export const SettingsDialog = (props: Props) => {
+export const SettingsDialog = (props: SettingsDialogProps) => {
   const { open, onClose } = props
   const { state, patchState } = useGlobalContext()
   const [settings, setSettings] = useState({ ...state })

@@ -6,7 +6,7 @@ import {
   waitFor,
   render,
 } from '@testing-library/react'
-import { PlayerClock, PLAYER_CLOCK_TEST_ID, type Props } from './PlayerClock'
+import { PlayerClock, PLAYER_CLOCK_TEST_ID, type PlayerClockProps } from './PlayerClock'
 import {
   renderWithGlobalContext,
   defaultState,
@@ -17,7 +17,7 @@ import {
 const firstPlayer = 0
 const lastPlayer = defaultState.numPlayers - 1
 
-const renderWithProps = ({ playerId }: Props, options?: RenderOptions) => {
+const renderWithProps = ({ playerId }: PlayerClockProps, options?: RenderOptions) => {
   return renderWithGlobalContext(<PlayerClock playerId={playerId} />, options)
 }
 

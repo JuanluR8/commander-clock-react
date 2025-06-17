@@ -1,11 +1,11 @@
 import { type ButtonHTMLAttributes } from 'react'
 import './BaseBtn.styles.css'
 
-export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface BaseBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rounded?: boolean
 }
 
-export const BaseBtn = (props: Props) => {
+export const BaseBtn = (props: BaseBtnProps) => {
   const { className = '', children, rounded = false, ...rest } = props
 
   return (

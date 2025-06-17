@@ -4,10 +4,10 @@ import {
   cleanup,
   render,
 } from '@testing-library/react'
-import { BaseBtn, type Props } from './BaseBtn'
+import { BaseBtn, type BaseBtnProps } from './BaseBtn'
 
 
-const renderWithProps = (props?: Props) => {
+const renderWithProps = (props?: BaseBtnProps) => {
   return render(<BaseBtn {...props} />)
 }
 

@@ -6,11 +6,11 @@ import './Playerclock.styles.css'
 
 export const PLAYER_CLOCK_TEST_ID = 'player-clock'
 
-export interface Props {
+export interface PlayerClockProps {
   playerId: number
 }
 
-export const PlayerClock = (props: Props) => {
+export const PlayerClock = (props: PlayerClockProps) => {
   const { playerId } = props
 
   const { state, patchState } = useGlobalContext()
