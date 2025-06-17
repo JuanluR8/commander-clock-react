@@ -55,7 +55,7 @@ export const SettingsDialog = (props: Props) => {
         <header>
           <h4>Settings</h4>
           <BaseBtn
-            aria-label="Close dialog"
+            aria-label="Close"
             className="actions-menu--btn btn--close"
             rounded
             onClick={onClose}
@@ -106,15 +106,15 @@ export const SettingsDialog = (props: Props) => {
 
         <footer>
           <BaseBtn
-            className="actions-menu--btn"
             aria-label="Reset"
+            className="actions-menu--btn"
             onClick={resetGame}
-            style={{ marginTop: '1rem' }}
           >
             Reset Game
           </BaseBtn>
 
           <BaseBtn
+            aria-label="Save"
             className="actions-menu--btn btn--close"
             onClick={saveSettings}
           >
