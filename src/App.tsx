@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { NUM_PLAYERS } from '@/constants'
 import { BaseBtn, MenuIcon, PlayerClock, SettingsDialog } from '@/components'
 import { GlobalContext, type GlobalState } from '@/contexts'
+import { useNoSleep } from '@/hooks/useNoSleep.ts'
 import './styles/App.css'
 
 function App() {
+  useNoSleep()
   const [state, setState] = useState<GlobalState>({
     activePlayer: undefined,
     numPlayers: NUM_PLAYERS,

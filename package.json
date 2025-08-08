@@ -16,6 +16,7 @@
     "test:run": "npm run test -- --run"
   },
   "dependencies": {
+    "nosleep.js": "^0.12.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
