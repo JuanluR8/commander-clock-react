@@ -1,11 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest'
-import {
-  screen,
-  cleanup,
-  render,
-} from '@testing-library/react'
+import { screen, cleanup, render } from '@testing-library/react'
 import { BaseBtn, type BaseBtnProps } from './BaseBtn'
-
 
 const renderWithProps = (props?: BaseBtnProps) => {
   return render(<BaseBtn {...props} />)
@@ -29,14 +24,8 @@ describe('<BaseBtn />', () => {
   })
 
   it('should render btn with custom className', () => {
-    renderWithProps({ children: 'My custom label', className: 'my-class' })
+    renderWithProps({ className: 'my-class' })
 
     expect(screen.getByRole('button').classList).toContain('my-class')
-  })
-
-  it('should be rounded when prop is passed', () => {
-    renderWithProps({ children: 'My custom label', rounded: true })
-
-    expect(screen.getByRole('button').classList).toContain('rounded')
   })
 })

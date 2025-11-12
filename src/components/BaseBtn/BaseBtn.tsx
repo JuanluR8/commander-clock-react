@@ -1,18 +1,13 @@
 import { type ButtonHTMLAttributes } from 'react'
 import './BaseBtn.styles.css'
 
-export interface BaseBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  rounded?: boolean
-}
+export type BaseBtnProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 export const BaseBtn = (props: BaseBtnProps) => {
-  const { className = '', children, rounded = false, ...rest } = props
+  const { className, children, ...rest } = props
 
   return (
-    <button
-      className={`base-btn ${className} ${rounded ? 'rounded' : ''}`.trim()}
-      {...rest}
-    >
+    <button className={`base-btn ${className}`} {...rest}>
       {children}
     </button>
   )

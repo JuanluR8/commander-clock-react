@@ -1,43 +1,48 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
-import {
-  screen,
-  cleanup,
-  fireEvent,
-  waitFor,
-  render,
-} from '@testing-library/react'
-import { PlayerClock, PLAYER_CLOCK_TEST_ID, type PlayerClockProps } from './PlayerClock'
+import { screen, cleanup, fireEvent, act, render } from '@testing-library/react'
+import { PlayerClock, type PlayerClockProps } from './PlayerClock'
 import {
   renderWithGlobalContext,
   defaultState,
-  patchState,
+  updateState,
   type RenderOptions,
 } from '@/tests/tests.utils'
 
 const firstPlayer = 0
 const lastPlayer = defaultState.numPlayers - 1
 
-const renderWithProps = ({ playerId }: PlayerClockProps, options?: RenderOptions) => {
-  return renderWithGlobalContext(<PlayerClock playerId={playerId} />, options)
+const PLAYER_CLOCK_TEST_ID = 'playerClock'
+
+const renderWithProps = (
+  { playerId }: PlayerClockProps,
+  options?: RenderOptions
+) => {
+  return renderWithGlobalContext(
+    <PlayerClock playerId={playerId} data-testid={PLAYER_CLOCK_TEST_ID} />,
+    options
+  )
 }
 
 describe('<PlayerClock />', () => {
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.clearAllMocks()
   })
 
   afterEach(() => {
     cleanup()
-  })
-
-  it('should render component', () => {
-    renderWithProps({ playerId: firstPlayer })
-
-    expect(screen.findByTestId(PLAYER_CLOCK_TEST_ID)).toBeDefined()
+    vi.useRealTimers()
   })
 
   it('should have flip class if playerId is in the up side', () => {
-    const FirstPlayer = renderWithProps({ playerId: firstPlayer })
+    const FirstPlayer = renderWithProps(
+      { playerId: firstPlayer },
+      {
+        state: {
+          numPlayers: 2,
+        },
+      }
+    )
 
     expect(FirstPlayer.getByTestId(PLAYER_CLOCK_TEST_ID).className).contain(
       'flip'
@@ -55,7 +60,7 @@ describe('<PlayerClock />', () => {
   it('should have active class if player is active', () => {
     const ActivePlayer = renderWithProps(
       { playerId: firstPlayer },
-      { providerProps: { state: { activePlayer: firstPlayer } } }
+      { state: { activePlayer: firstPlayer } }
     )
 
     expect(ActivePlayer.getByTestId(PLAYER_CLOCK_TEST_ID).className).contain(
@@ -66,7 +71,7 @@ describe('<PlayerClock />', () => {
 
     const InactivePlayer = renderWithProps(
       { playerId: lastPlayer },
-      { providerProps: { state: { activePlayer: firstPlayer } } }
+      { state: { activePlayer: firstPlayer } }
     )
 
     expect(
@@ -83,40 +88,35 @@ describe('<PlayerClock />', () => {
   })
 
   it('should set activePlayer onClick article', () => {
-    renderWithProps({ playerId: firstPlayer })
+    const playerId = 1
+
+    renderWithProps({ playerId })
 
     fireEvent.click(screen.getByTestId(PLAYER_CLOCK_TEST_ID))
 
-    expect(patchState).toHaveBeenCalledWith({ activePlayer: firstPlayer })
+    expect(updateState).toHaveBeenCalledWith({ activePlayer: playerId })
   })
 
   it('should set activePlayer to undefined onClick article if player was active', () => {
     renderWithProps(
       { playerId: firstPlayer },
-      { providerProps: { state: { activePlayer: firstPlayer } } }
+      { state: { activePlayer: firstPlayer } }
     )
 
     fireEvent.click(screen.getByTestId(PLAYER_CLOCK_TEST_ID))
 
-    expect(patchState).toHaveBeenCalledWith({ activePlayer: undefined })
+    expect(updateState).toHaveBeenCalledWith({ activePlayer: undefined })
   })
 
   it('should decrease displayer time while player is active', async () => {
     renderWithProps(
       { playerId: firstPlayer },
-      { providerProps: { state: { activePlayer: firstPlayer, timeLimit: 20 } } }
+      { state: { activePlayer: firstPlayer, timeLimit: 20 } }
     )
 
     expect(screen.getByTestId(PLAYER_CLOCK_TEST_ID).innerHTML).toMatch('20:00')
-
-    waitFor(
-      () => {
-        expect(screen.getByTestId(PLAYER_CLOCK_TEST_ID).innerHTML).toMatch(
-          '19:55'
-        )
-      },
-      { timeout: 5000 }
-    )
+    await act(() => vi.advanceTimersByTime(5000))
+    expect(screen.getByTestId(PLAYER_CLOCK_TEST_ID).innerHTML).toMatch('19:55')
   })
 
   it('should throw error if component is rendered without GlobalContext provider', () => {

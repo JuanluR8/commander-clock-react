@@ -1,19 +1,16 @@
-import { useCallback, useEffect, useState } from 'react'
+import { type HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { MINUTE_IN_MS } from '@/constants'
 import { formatTime } from '@/utils'
 import { useGlobalContext } from '@/contexts'
 import './Playerclock.styles.css'
 
-export const PLAYER_CLOCK_TEST_ID = 'player-clock'
-
-export interface PlayerClockProps {
+export interface PlayerClockProps extends HTMLAttributes<HTMLDivElement> {
   playerId: number
 }
 
 export const PlayerClock = (props: PlayerClockProps) => {
-  const { playerId } = props
-
-  const { state, patchState } = useGlobalContext()
+  const { playerId, ...rest } = props
+  const { state, updateState } = useGlobalContext()
   const [time, setTime] = useState(0)
 
   const isActive = state.activePlayer === playerId
@@ -24,10 +21,10 @@ export const PlayerClock = (props: PlayerClockProps) => {
   ]
 
   const onClickPlayerTimer = useCallback(() => {
-    patchState({
+    updateState({
       activePlayer: state.activePlayer === playerId ? undefined : playerId,
     })
-  }, [patchState, state.activePlayer, playerId])
+  }, [updateState, state.activePlayer, playerId])
 
   const decreaseTimeout = useCallback(() => {
     const intervalId = setInterval(() => {
@@ -48,8 +45,8 @@ export const PlayerClock = (props: PlayerClockProps) => {
 
   return (
     <article
+      {...rest}
       className={['player-clock', ...articleClasses].join(' ')}
-      data-testid={PLAYER_CLOCK_TEST_ID}
       onClick={onClickPlayerTimer}
     >
       <div className="player-clock--time">{formatTime(time)}</div>

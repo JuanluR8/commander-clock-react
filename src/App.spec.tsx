@@ -1,33 +1,36 @@
-import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
-import { screen, cleanup, render } from '@testing-library/react'
+import { describe, it, expect, afterEach, vi } from 'vitest'
+import { render, cleanup } from '@testing-library/react'
 import App from './App'
-import { PLAYER_CLOCK_TEST_ID as PlayerClockTestId } from './components/PlayerClock/PlayerClock'
-import { NUM_PLAYERS } from './constants'
+
+vi.mock('@/hooks', () => ({
+  useSettings: () => ({
+    state: { numPlayers: 4 },
+    updateState: vi.fn(),
+  }),
+}))
 
 describe('<App />', () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
+  afterEach(() => {
+    cleanup()
   })
 
-  afterEach(cleanup)
+  it('should render mainContainer based on numPlayers', () => {
+    const wrapper = render(<App />)
 
-  it('should render App', () => {
-    render(<App />)
-
-    expect(screen.findByTestId('main-container')).toBeDefined()
-  })
-
-  it("should render as many PlayerClock's as numPlayers", async () => {
-    render(<App />)
-
-    expect(await screen.findAllByTestId(PlayerClockTestId)).toHaveLength(
-      NUM_PLAYERS
+    expect(wrapper.getByTestId('main-container').className).toContain(
+      `num-players-4`
     )
   })
 
-  it('should render Settings menu', () => {
-    render(<App />)
+  it("should render as many PlayerClock's as numPlayers", () => {
+    const wrapper = render(<App />)
 
-    expect(screen.findByRole('button', { name: /settings/i })).toBeDefined()
+    expect(wrapper.getAllByTestId('player-clock')).toHaveLength(4)
+  })
+
+  it('should render Settings menu', () => {
+    const wrapper = render(<App />)
+
+    expect(wrapper.getByRole('button', { name: /settings/i })).toBeDefined()
   })
 })

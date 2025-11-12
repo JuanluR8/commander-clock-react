@@ -1,51 +1,33 @@
-export const ReloadIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    height="28"
-    width="28"
-    viewBox="0 0 24 24"
-  >
-    <path
-      d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-  </svg>
-)
+import { PropsWithChildren } from 'react'
+
+const IconWrapper = ({ children }: PropsWithChildren) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+    >
+      {children}
+    </svg>
+  )
+}
 
 export const PlusIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    height="24"
-    width="24"
-    viewBox="0 0 24 24"
-  >
+  <IconWrapper>
     <path d="M4 12H20M12 4V20" stroke="currentColor" strokeWidth="2" />
-  </svg>
+  </IconWrapper>
 )
 
 export const MinusIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    height="24"
-    width="24"
-    viewBox="0 0 24 24"
-  >
+  <IconWrapper>
     <path d="M6 12L18 12" stroke="currentColor" strokeWidth="2" />
-  </svg>
+  </IconWrapper>
 )
 
 export const MenuIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="64"
-    height="64"
-    viewBox="-0.5 0 25 25"
-    fill="none"
-  >
+  <IconWrapper>
     <path
       d="M19 3.32001H16C14.8954 3.32001 14 4.21544 14 5.32001V8.32001C14 9.42458 14.8954 10.32 16 10.32H19C20.1046 10.32 21 9.42458 21 8.32001V5.32001C21 4.21544 20.1046 3.32001 19 3.32001Z"
       stroke="currentColor"
@@ -74,17 +56,11 @@ export const MenuIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-  </svg>
+  </IconWrapper>
 )
 
 export const CloseIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    height="24"
-    width="24"
-    viewBox="0 0 24 24"
-  >
+  <IconWrapper>
     <path
       d="M18 6L6 18M6 6l12 12"
       stroke="currentColor"
@@ -92,5 +68,5 @@ export const CloseIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-  </svg>
+  </IconWrapper>
 )

@@ -1,9 +1,4 @@
-:root {
-  --black: #242424;
-  --primary: #FFD800;
-  --red: #D72638;
-  --app-spacing: 1rem;
-}
+@import './properties.css';
 
 #root {
   max-width: 1280px;

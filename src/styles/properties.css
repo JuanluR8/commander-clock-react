@@ -1,0 +1,23 @@
+@property --app-spacing {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 16px;
+}
+
+@property --black {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #242424;
+}
+
+@property --red {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #D72638;
+}
+
+@property --primary {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #FFD800;
+}
